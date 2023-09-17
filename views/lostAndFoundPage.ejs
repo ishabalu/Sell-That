@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found new</title>
+
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/rakshanaStyles.css">
+
+  <link rel="stylesheet" href="/css/index.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+  <link rel="stylesheet" href="/fonts/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+
+</head>
+
+<body>
+
+
+  <div class="navbar-fixed-top bg">
+    <div class="container bg">
+      <nav class="site-navbar ">
+        <!-- site logo -->
+        <a href="#home" class="site-logo">SELL-THAT!</a>
+
+        <!-- site menu/nav -->
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="shopping">Buy/Sell</a></li>
+          <li><a href="lostAndFound">Lost & Found</a></li>
+          <li><a href="forum">Forum</a></li>
+          <li><a class="pp3" href="/dashboard"><img class="img-fluid pp2" src="/img/team/jojo.jpg" alt=""> </a></li>
+        </ul>
+
+        <!-- nav-toggler for mobile version only -->
+        <button class="nav-toggler">
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </div>
+  <!--
+          end of nav bar
+      -->
+
+  <div class="page-wrapper">
+    <div class="headpart">
+      <h2 id="found">Found items near you</h2>
+      <button class=" btn float-right postBtn" id="postbtn">Your items</button>
+      <div id="postItemModal" class=modal>
+        <div class="modal-content">
+          <span class="close">&#10005;</span>
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event,'tab1')">Post an item you found</button>
+            <button class="tablinks" onclick="openTab(event,'tab2')">Previous items</button>
+          </div>
+          <div id="tab1" class="tabcontent">
+            <h4>Fill in the details</h4>
+            <h6>Please add the information for other students to view before submitting the item to the Admin
+              Department.</h6>
+            <br>
+            <div class="formDiv">
+              <form action="/lostFound" method="POST">
+                <label for="fname">Item name</label>
+                <input type="text" id="fname" required name="item_name" placeholder="Item name">
+
+                <label for="lname">Found in</label>
+                <input type="text" id="lname" required name="item_place" placeholder="Location found">
+
+                <label for="details">Note</label>
+                <input type="text" id="details" name="item_desc" placeholder="Add any relevant details..">
+                <hr>
+                <div>
+                  <label for="upload" class="uploadButton">Upload image</label>
+                  <input type="file" name="upload" id="upload" required>
+                </div>
+                <br>
+                <input type="submit" id="closeOnSubmit" value="Submit" onclick="lostFoundForm()">
+              </form>
+            </div>
+          </div>
+
+          <div id="tab2" class="tabcontent">
+
+            <div>
+              <% fPosts.forEach((i)=> { %>
+                 %>
+              <div class="prev">
+                <h5 > <%= i.item_name %> </h5>
+                <p>Found near <%= i.place %> </p>
+                <div style="width: 5%; text-align: center;">
+                  <form action="/delLostAndFound/<%= i.item_id %>" method="POST">
+                    <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
+                  </form>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <hr class="headLine">
+    </div>
+  </div>
+
+
+  <div class="cards">
+    <!--dynamic looping raks-->
+    <% posts.forEach((post) => { %>
+    <div class="card">
+      <div class="card__image-holder">
+        <img class="card__image img-fluid" src=<%= post.imagu %> alt="wave" />
+      </div>
+      <div class="card-title">
+
+        <span class="left"></span>
+        <span class="right"></span>
+        </a>
+        <h2>
+          <%= post.item_name %>
+          <small><%= post.place %></small>
+        </h2>
+      </div>
+      <div id="descBox">
+        <div class="card-description">
+          <%= post.desc %>
+        </div>
+        <div class="">
+          <p class="demo"></p>
+          <div class="readmore">
+            <a class="btn"> Submitted to Admin Dept </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% }) %>
+
+  </div>
+
+
+  </div>
+  </div>
+
+</body>
+<script src="/js/rakshana.js"></script>
+
+</html>

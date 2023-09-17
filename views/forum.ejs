@@ -1,0 +1,248 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/forum.css">
+  <link rel="stylesheet" href="/css/index.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="hhttps://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#myModal").on('shown.bs.modal', function () {
+        $(this).find('#textarea1').focus();
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+
+  <div class="navbar-fixed-top bg">
+    <div class="container bg">
+      <nav class="site-navbar ">
+        <!-- site logo -->
+        <a href="#home" class="site-logo">SELL-THAT!</a>
+
+        <!-- site menu/nav -->
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="shopping">Buy/Sell</a></li>
+          <li><a href="lostAndFound">Lost & Found</a></li>
+          <li><a href="forum">Forum</a></li>
+          <li><a class="pp3" href="/dashboard"><img class="img-fluid pp2" src="/img/team/jojo.jpg" alt=""> </a></li>
+        </ul>
+
+        <!-- nav-toggler for mobile version only -->
+        <button class="nav-toggler">
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <div class="every">
+      <div class="row" style="margin-top: 2% !important;">
+        <div class="content">
+          <button type="button" class="modal-button" data-toggle="modal" data-target="#myModal">ASK A QUESTION!</button>
+        </div>
+
+
+      </div>
+      <!-- <form action="/question" method="POST">
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="card">
+              <div class="card-img"> <img class="img-fluid centerScreen" src="./img/avatars/ask.png"> </div>
+              <div class="card-title">
+                <p style="align-items: center;">Ask away!</p>
+              </div>
+              <div class="card-text">
+                <textarea id="textarea1" style="background-color: antiquewhite;" cols="57" rows="6"
+                  placeholder="Type Here..." name="Question"></textarea>
+              </div>
+              <input type="submit" style="background-color:  rgb(29, 226, 226); position: relative;
+                    bottom: -20px;" class="btn" value="POST"></input>
+            </div>
+          </div>
+        </div>
+      </form> -->
+      <form action="/question" method="POST">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="text-right cross"> </div>
+              <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100"
+                  width="100">
+                <div class="comment-box text-center">
+                  <h4>Ask away</h4>
+
+                  <div class="comment-area" style="width: 100%;"> <textarea  class="form-control" placeholder="ASK HERE"  
+                      rows="4" cols="5" name="Question" id="Answer"></textarea> </div>
+                  <div class="text-center mt-4"><input type="submit" class="btn btn-success btn-sm" value="POST" ></input> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+
+      <div class="cards">
+        
+        <%  for(var i =0;i< info.length;i++){ %>
+        <div class="card">
+          <div class="card-body">
+            <div class="p-2">
+              <img alt="user" width="70" class="rounded-circle" src=<%= info[i].imagu %> />
+            </div>
+            <h4 class="card-title"><%= info[i].name %></h4>
+            <h6 class="card-subtitle mb-2 text-muted"><%= info[i].regNo %></h6>
+            <p class="card-text"><%= info[i].question %></p>
+            <hr>
+
+            <button type="button" class="btn1"  data-toggle="modal" data-target="#form<%= i %>">Answer </button>
+           <form method="POST" action="/answer/<%= info[i].doc_id %>">
+              <div class="modal fade" id="form<%= i %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="text-right cross"> </div>
+                    <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100"
+                        width="100">
+                      <div class="comment-box text-center">
+                        <h4>Add a comment</h4>
+
+                        <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?"  
+                            rows="4" name="Answer" id="Answer"></textarea> </div>
+                        <div class="text-center mt-4"> <input  type="submit" value="POST" class="btn btn-success btn-sm" ></input></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            
+           
+              <button type="submit" class="btn1" data-toggle="modal" data-target="#myModal<%= i %>">Show Answer</button>
+            
+
+            
+
+
+
+            <!-- Modal -->
+            <div id="myModal<%= i %>" class="modal fade" role="dialog">
+              <div class="modal-dialog  ">
+
+
+                <div class="card2 modal-content modal-dialog-scrollable">
+                  <div class="card-body modal-header text-center ">
+                    <h4 class="card-title"><%= info[i].question %></h4>
+                  </div>
+                  <div class="comment-widgets modal-body" style="width: 100%;">
+                    <!--dynamic looping ice-->
+                    <!-- Comment Row -->
+                    
+                    
+                    <% for(var j =0;j <finalAnswers[i].length;j++ ){  %>
+                      
+                    <div class="d-flex flex-row comment-row">
+                      <div class="p-2">
+                        <img alt="user" width="70" class="rounded-circle" src=<%= finalAnswers[i][j].imagu %> />
+                      </div>
+                      <div class="comment-text w-150 ">
+                        <h4 class="font-medium"><%= finalAnswers[i][j].author %></h4> <span
+                          class="m-b-15 d-block"><%= finalAnswers[i][j].title %></span>
+                        <div class="comment-footer"> <span class="text-muted float-right"><%= finalAnswers[i][j].ans_date %></span>
+                          
+                         <% if(cur_user == finalAnswers[i][j].user_id){ %>
+                          <div>
+                            <button id="<%=finalAnswers[i][j].ans_id%>"  type="button" class="btn btn-success btn-sm" style="width:100%;"
+                            
+                              onclick="Edit_ans(this.id,'<%= info[i].doc_id%>')">Edit</button>
+                          </div>
+                           
+                              <!-- <p><%= i + "" + j %></p> -->
+                              
+                          
+
+
+                          <form action="/delete/<%= finalAnswers[i][j].ans_id %>/<%= info[i].doc_id %>" method="POST">
+                            <input type="submit" class="btn btn-danger btn-sm" style="width:100%;"
+                              value="Delete"></input>
+                          </form>
+                        <%}%>
+
+
+
+
+                          <hr>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <% } %>
+                   
+                  </div> <!-- Card -->
+                </div>
+
+
+
+
+              </div>
+            </div>
+            <hr>
+            <label>Share this</label>
+            <br>
+            <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+            <a href="https://www.linkedin.com/home" class="fa fa-linkedin"></a>
+            <a href="https://accounts.google.com/Login/signinchooser?hl=en&flowName=GlifWebSignIn&flowEntry=ServiceLogin" class="fa fa-google"></a>
+
+          </div>
+        </div>
+
+
+        <% } %>
+      </div>
+
+    </div>
+  </main>
+  <script>
+    $(document).on("mousedown", "#reply_msg", function(e) {
+    e.preventDefault();
+    $(this).hide();
+    $("#reply_message").show().focus();
+});
+    function Edit_ans(a,b) {
+      console.log("----- here ra"+a);
+      document.getElementById(a).outerHTML = "<form action='/EditAns/"+ a+ "/"+b+"'"+ "method='POST'><textarea name='desc' style='width: 100%;resize: none;' id='reply_message' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' value='Confirm Edit'></input></form>" ;
+      // "<form action='/EditAns' method='POST'><textarea name='edit' disabled='false' style='width: 100%;resize: none;' autofocus ></textarea><br><input type='submit' class='btn btn-success btn-sm' onclick='rev()' value='Confirm Edit'></input></form>";
+    }
+    function rev(a) {
+      document.getElementById(a).innerHTML = "<button type='button' class='btn btn-success btn-sm'  onclick='Edit_ans()'>Edit</button>";
+    }
+  </script>
+</body>
+
+</html>

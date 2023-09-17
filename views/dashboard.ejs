@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/index.css">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <title>Sell That</title>
+</head>
+
+<body>
+
+  <div class="navbar-area navbar-fixed-top bg">
+    <div class="container">
+      <nav class="site-navbar">
+        <!-- site logo -->
+        <a href="#home" class="site-logo">SELL-THAT!</a>
+
+        <!-- site menu/nav -->
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/shopping">Buy/Sell</a></li>
+          <li><a href="/lostAndFound">Lost & Found</a></li>
+          <li><a href="/forum">Forum</a></li>
+          <li><a class="pp3" href="/dashboard"><img class="img-fluid pp2" src="/img/team/jojo.jpg" alt=""> </a></li>
+        </ul>
+
+        <!-- nav-toggler for mobile version only -->
+        <button class="nav-toggler">
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 welcome-text content">
+      <h1 class="welcome-h1">Hi, <%= user_name %></h1>
+    </div>
+
+    <div class="col-md-3">
+      
+        <a href="/logout" style="margin-top: 20px;" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+      
+    </div>
+
+  </div>
+  <div class=row>
+    <span class="col-md-2 col-sm-1 col-xs-1"></span>
+
+    <div class="col-md-8 gradient-border content" id="box">
+
+      <div class="row">
+        <% requests.forEach((request) => { %>
+
+        <div class="col-md-3 col-sm-6 card-holder">
+
+          <section class="card3 card--01">
+            <h1 class="card__heading">Product alert</h1>
+            <p class="card__text">
+              <%= request.req_name %> has requested for <%= request.req_product %>
+            </p>
+          </section>
+
+          <span class="card-shadow card-shadow--01"></span>
+        </div>
+        <% }) %>
+
+      </div>
+
+    </div>
+
+    <span class="col-md-2 col-sm-1 col-xs-1"></span>
+  </div>
+  <div class="row" style="margin-bottom:10%">
+    <span class="col-md-2 col-sm-1 col-xs-1"></span>
+    <div class="col-md-3">
+      <div class="container2">
+        <div class="card2 content">
+          <img src="/img/team/jojo.jpg" alt="Chyno Deluxe">
+          <h1><%= user_name %></h1>
+          <h2><%= user_college %></h2>
+          <a class="button" target="_blank"> <%= productCount %> Ads</a>
+          <a class="button" target="_blank"> <%= answersCount %> Answers</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <table class="rwd-table">
+        <% ads.forEach((ad) => { %>
+        <tr>
+          <td data-th="Movie Title"> <%= ad.name %> </td>
+          <td data-th="Genre"><%= ad.notiType %></td>
+          <td data-th="Year"> <%= ad.product_name %> </td>
+          <td data-th="Gross"> <%= ad.info_noti %> </td>
+        </tr>
+        <% }) %>
+      </table>
+    </div>
+    <span class="col-md-2 col-sm-1 col-xs-1"></span>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

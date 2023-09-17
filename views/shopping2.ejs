@@ -1,0 +1,201 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Home - Sell That!</title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+  <link rel="stylesheet" href="/fonts/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+
+  <link rel="stylesheet" href="/css/shopping2.css">
+  <link rel="stylesheet" href="/css/rakshanaStyles.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+    integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+    integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous">
+    </script>
+
+</head>
+
+<body>
+  <div class="navbar-fixed-top bg">
+    <div class="container bg">
+      <nav class="site-navbar ">
+        <!-- site logo -->
+        <a href="#home" class="site-logo">SELL-THAT!</a>
+
+
+        <!-- site menu/nav -->
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/shopping">Buy/Sell</a></li>
+          <li><a href="/lostAndFound">Lost & Found</a></li>
+          <li><a href="/forum">Forum</a></li>
+          <li><a class="pp3" href="/dashboard"><img class="img-fluid pp2" src="/img/team/jojo.jpg" alt="">
+            </a></li>
+        </ul>
+        <!-- nav-toggler for mobile version only -->
+        <button class="nav-toggler">
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+
+
+  <div class="page-wrapper">
+    <div class="headpart">
+      <h2 id="found">Buy these!</h2>
+
+      <div style="text-align: center; display: inline-block; margin-left: 6%;">
+        <form class="search-container">
+          <div class="inputContainer">
+
+            <input class="Field" type="text" id="search-bar" placeholder="What can I help you with today?">
+            <i class="fa fa-search icon"> </i>
+
+          </div>
+        </form>
+      </div>
+
+      <button class=" btn float-right postBtn" id="postBtn2">Sell</button>
+      <div id="postItemModal2" class=modal>
+        <div class="modal-content">
+          <span class="close">&#10005;</span>
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event,'bstab1')">Sell your item</button>
+            <button class="tablinks" onclick="openTab(event,'bstab2')">Your Ads</button>
+            <button class="tablinks" onclick="openTab(event,'bstab3')">Cart</button>
+          </div>
+          <div id="bstab1" class="tabcontent">
+            <h4>Fill in the details</h4>
+            <h6>Please add the information for other students to view before submitting the item to the Admin
+              Department.</h6>
+            <br>
+            <div class="formDiv">
+              <form action="/sellProduct" method="POST">
+
+                <label for="fname">Item name</label>
+                <input type="text" id="fname" required name="item_name" placeholder="Item name">
+
+                <label for="lname">Desc</label>
+                <input type="text" id="lname" required name="item_desc" placeholder="About item">
+
+                <label for="details">Original Price</label>
+                <input type="number" id="details" name="original_price" placeholder="">
+
+                <label for="details">Selling Price</label>
+                <input type="number" id="details" name="selling_price" placeholder="">
+
+                <hr>
+                <div>
+                  <label for="upload" class="uploadButton">Upload image</label>
+                  <input type="file" name="upload" id="upload" required>
+                </div>
+                <br>
+                <input type="submit" value="Submit" onclick="lostFoundForm()">
+              </form>
+            </div>
+          </div>
+
+          <div id="bstab2" class="tabcontent">
+
+            <div>
+              <% user_ads.forEach((i)=> { %>
+            <div class="prev">
+              <h5> <%= i.item_name %> </h5>
+              <p><%= i.selling_price %></p>
+              <div style="width: 10%; text-align: center; height: 10%;">
+                <form action="/delAddedProduct/<%= i.item_id %>" method="POST">
+                  <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
+                </form>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+          </div>
+
+          <div id="bstab3" class="tabcontent">
+            <% your_cart.forEach((i) => { %>
+            <div class="prev">
+              <h5><%= i.item_name %></h5>
+              <p><%= i.seller_email %></p>
+              <div style="width: 10%; text-align: center; border-radius: 100%;">
+                <form action="/delFromCart/<%= i.item_id %>" method="POST">
+                  <input type="submit" value="&#10005;" class="btn btn-primary del"></input>
+                </form>
+                <button class="cont"><%= i.seller_no %></button>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+
+
+        </div>
+      </div>
+      <hr class="headLine">
+    </div>
+  </div>
+  <div class="container">
+
+    <section id="cart">
+
+      <% buys.forEach((item) => { %>
+      <article name="item_id" class="product">
+        <header>
+
+          <img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/1.jpg" alt="">
+
+
+
+        </header>
+
+        <div class="content">
+
+          <h1> <%= item.item_name %> </h1>
+
+          <%= item.item_desc %>
+
+
+        </div>
+
+        <footer class="content">
+          <h2 class="full-price">
+            <%= item.selling_price %>
+          </h2>
+
+          <h2 class="price">
+            Actual Price - <%= item.original_price %>
+          </h2>
+          <form style="float: left;" method="POST" action="/addToCart/<%= item.item_id %>">
+            <input id="addCart" type="submit" value="Add to Cart">
+          </form>
+          
+        </footer>
+      </article>
+
+
+      <% }) %>
+    </section>
+
+  </div>
+
+
+</body>
+<script src="/js/sellAndBuy.js"></script>
+
+</html>
